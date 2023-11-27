@@ -1,0 +1,28 @@
+To pull multiple values from xcom, we can use 'xcom_pull(), method with a list
+of task IDs 
+
+for example : 
+
+# Define a list of task IDs
+task_ids = ['task_id_1', 'task_id_2', 'task_id_3']
+
+# Pull multiple values from XCom
+pulled_values = [
+    ti.xcom_pull(key='my_key_1', task_ids=task_ids),
+    ti.xcom_pull(key='my_key_2', task_ids=task_ids),
+    ti.xcom_pull(key='my_key_3', task_ids=task_ids)
+]
+
+# Process the pulled values
+for pulled_value in pulled_values:
+    if pulled_value:
+        # Process the value as needed
+        print(f"Key: {pulled_value[0].key}, Value: {pulled_value[0].value}")
+    else:
+        print(f"No value found for key: {pulled_value[0].key}")
+
+
+In this example, the xcom_pull() method is called three times for each key, 
+and the results are stored in a list called pulled_values. The pulled_values list contains three elements, 
+each representing the result of pulling a value from XCom for a different key. 
+we can then iterate through the pulled_values list and process the values as needed.
